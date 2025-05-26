@@ -1,0 +1,237 @@
+---
+title: "Graded Assignment"
+author: "s4581733"
+subtitle: "Data Visualization 2024-2025"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo = FALSE, message = FALSE}
+# Load packages
+
+## Some packages you might need are already loaded: 
+library(tidyverse)
+library(foreign) # to import data
+library(readr)
+library(sf)
+```
+
+
+
+# Task 1. Data explorations (45%)
+
+## Task 1a)
+
+```{r}
+# Import data:
+# Using read_csv2 assuming the file uses semicolon as separator, as hinted by the function name.
+vanEmissions <- read_csv2("Data/VanEmissionsLong.csv")
+
+# Convert relevant columns to factors for correct plotting
+vanEmissions$Year <- factor(vanEmissions$Year)
+# Ensure EmissionClass is treated as ordered factor if higher implies cleaner,
+# or simply as factor for discrete colors. Let's treat it as factor for fill.
+vanEmissions$EmissionClass <- factor(vanEmissions$EmissionClass, 
+                                     levels = sort(unique(vanEmissions$EmissionClass))) # Ensure classes are in numerical order in legend
+
+# Add your code here
+# Check data structure
+str(vanEmissions)
+```
+
+```{r}
+# Add your code here
+# Create the grouped bar chart
+ggplot(vanEmissions, aes(x = Year, y = Percentage, fill = EmissionClass)) +
+  geom_col(position = "dodge") + # Use position = "dodge" to group bars by year
+  scale_fill_viridis_d(option = "plasma") + # Use a discrete color scale suitable for different classes
+  labs(
+    title = "Distribution of Emission Classes of Vans in the Netherlands",
+    subtitle = "Change from 2020 to 2024",
+    x = "Year",
+    y = "Percentage of Vans (%)",
+    fill = "Emission Class", # Legend title for fill color
+    caption = "*Higher Emission Class numbers indicate cleaner vehicles.\nNote the increasing percentage of vans in higher classes over time."
+  ) +
+  theme_minimal() + # Use a clean theme
+  theme(
+    plot.title = element_text(hjust = 0.5), # Center plot title
+    plot.subtitle = element_text(hjust = 0.5) # Center plot subtitle
+  )
+```
+```{r}
+# Import data:
+# Using read_csv2 assuming the file uses semicolon as separator.
+speedTickets2023 <- read_csv2("Data/speedTickets_perMonthPerProvince.csv")
+
+# Convert Month to ordered factor or numeric if treating as time series.
+# Since months are ordered, converting to factor might be better for discrete x-axis positions.
+speedTickets2023$Month <- factor(speedTickets2023$Month, levels = 1:12, 
+                                 labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+
+str(speedTickets2023)
+```
+
+
+## Task 1b)
+
+```{r}
+# Import data:
+# Using read_csv2 assuming the file uses semicolon as separator.
+speedTickets2023 <- read_csv2("Data/speedTickets_perMonthPerProvince.csv")
+
+# Convert Month to ordered factor or numeric if treating as time series.
+# Since months are ordered, converting to factor might be better for discrete x-axis positions.
+speedTickets2023$Month <- factor(speedTickets2023$Month, levels = 1:12, 
+                                 labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+
+# Province should be a factor
+speedTickets2023$Province <- factor(speedTickets2023$Province)
+
+# geometry column is present but not needed for this specific plot
+speedTickets2023 <- select(speedTickets2023, -geometry) # Remove geometry column if not needed for this plot
+
+# Add your code here
+str(speedTickets2023)
+
+# Create the plot showing ticket counts over months for each province
+# Using a line plot to show trends over time for each province
+ggplot(speedTickets2023, aes(x = Month, y = Count, group = Province, color = Province)) +
+  geom_line() + # Draw lines connecting monthly counts for each province
+  geom_point() + # Add points for each data point
+  scale_color_viridis_d() + # Use a discrete color scale for provinces
+  labs(
+    title = "Monthly Speed Ticket Counts per Province in the Netherlands, 2023",
+    x = "Month",
+    y = "Number of Speed Tickets",
+    color = "Province" # Legend title for color
+  ) +
+  theme_minimal() +
+   theme(
+    plot.title = element_text(hjust = 0.5), # Center plot title
+    axis.text.x = element_text(angle = 45, hjust = 1) # Angle x-axis labels for readability
+  )
+
+# Alternative using grouped bars to easily compare provinces within each month (as in initial template idea)
+# This also makes it easy to visually identify provinces with consistently higher bars
+ggplot(speedTickets2023, aes(x = Month, y = Count, fill = Province)) +
+  geom_col(position = "dodge") +
+  scale_fill_viridis_d() +
+  labs(
+    title = "Monthly Speed Ticket Counts per Province in the Netherlands, 2023",
+    x = "Month",
+    y = "Number of Speed Tickets",
+    fill = "Province"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+# Choose one of the plots above. The line plot shows trends better, 
+# the grouped bar chart makes direct monthly comparisons between provinces easier.
+# The prompt asks how the number changes over time *for each province* (line plot is good)
+# and which provinces are *generally* highest (both can show this, grouped bar might be clearer visually).
+# Let's keep the grouped bar chart as it directly shows counts side-by-side per month.
+```
+# Task 1. c)
+
+```{r}
+# Load data as a data frame, set variables to numeric
+# Using read.csv2 assuming semicolon separator. If comma, use read.csv
+# The prompt uses read.csv2 but variable descriptions use '.', assume read.csv2 is correct.
+# Convert columns explicitly to numeric, coercing errors to NA.
+marvel <- read.csv2("Data/Marvel.csv")
+marvel$AudienceScore <- as.numeric(as.character(marvel$AudienceScore)) # Convert factor to character first if needed
+marvel$CriticsScore <- as.numeric(as.character(marvel$CriticsScore))   # Convert factor to character first if needed
+# WorldGross seems to already be numeric in the provided data glimpse in the template
+# If not, convert: marvel$WorldGross <- as.numeric(as.character(marvel$WorldGross))
+
+# Convert Category to factor
+marvel$Category <- factor(marvel$Category)
+
+# Add your code here
+str(marvel)
+summary(marvel) # Check for NAs introduced by conversion
+
+```
+```{r}
+# Create the scatter plot
+ggplot(marvel, aes(x = AudienceScore, y = WorldGross)) +
+  geom_point(aes(color = CriticsScore, size = WorldGross)) + # Map CriticsScore to color, WorldGross to size
+  scale_color_viridis_c(option = "plasma", name = "Critics Score (%)") + # Color scale for Critics Score
+  scale_size_continuous(name = "World Gross (Million $)", range = c(1, 10)) + # Size scale for World Gross
+  facet_wrap(~ Category, scales = "free_y") + # Create separate plots for each category, with free y-axis scales
+  labs(
+    title = "Relationship between Audience Score and World Gross for Marvel Films",
+    subtitle = "Colored by Critics Score, faceted by Category",
+    x = "Audience Score (%)",
+    y = "Worldwide Gross Income (Million $)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5)
+  )
+```
+
+
+# Task 2. Remake the plot (50%)
+
+```{r, fig.width = 10, fig.height = 7}
+# Import data:
+# Using st_read for shapefiles
+potentialsolarenergyUSA <- st_read("Data/potentialsolarenergyUSA_shp/potentialsolarenergyUSA.shp")
+
+# Check data structure
+str(potentialsolarenergyUSA)
+summary(potentialsolarenergyUSA)
+```
+
+
+```{r}
+# Add your code here
+
+# Filter out Alaska ("Alaska") and Hawaii ("Hawaii")
+contiguous_usa <- potentialsolarenergyUSA %>%
+  filter(!State %in% c("Alaska", "Hawaii"))
+
+# Calculate the total solar potential for the contiguous states (for the caption)
+total_slr_ptnt <- sum(contiguous_usa$SlrPtnt, na.rm = TRUE)
+
+# Create the choropleth map
+ggplot(data = contiguous_usa) + # Use the filtered data frame
+  geom_sf(aes(fill = SlrPtnt)) + # Map SlrPtnt to fill color, geom_sf handles the geometry
+  scale_fill_distiller( 
+    palette = "YlGn", # Use the 'Greens' sequential palette
+    direction = -1,      # Use direction = 1 for darker colors representing higher values (standard for sequential)
+    trans = "identity",      # Keep log transformation
+    breaks = c(0, 10000, 20000, 30000, 40000), # Keep breaks
+    labels = scales::comma, # Keep labels format
+    name = "terawatt hours", # Keep legend title
+    guide = guide_colorbar( # Use guide_colorbar to control legend appearance
+      barwidth = 15,      # Set the width of the color bar (adjust value as needed)
+      barheight = 0.5       # Set the height of the color bar (adjust value as needed)
+    )
+  ) +
+  theme_void() + # Remove map grid and axes
+  labs(
+    title = "The USA is Ripe for Solar Power",
+    subtitle = "Potential utility-scale capacity",
+    caption = paste("Total:", format(round(total_slr_ptnt), big.mark = ","), "terawatt hours") # Include the calculated total in the caption
+  ) +
+  theme(
+    legend.position = "top", # Place legend at the top
+    plot.title.position = "panel", # Center plot title
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(face = "italic"), # Center plot subtitle
+    plot.caption = element_text(hjust = 1) # Align caption to the right
+  )
+```

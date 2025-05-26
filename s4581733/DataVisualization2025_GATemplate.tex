@@ -1,0 +1,354 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Graded Assignment},
+  pdfauthor={s4581733},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Graded Assignment}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Data Visualization 2024-2025}
+\author{s4581733}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Task 1. Data explorations
+(45\%)}\label{task-1.-data-explorations-45}
+
+\subsection{Task 1a)}\label{task-1a}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Import data:}
+\NormalTok{vanEmissions }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv2}\NormalTok{(}\StringTok{"Data/VanEmissionsLong.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## i Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.
+\end{verbatim}
+
+\begin{verbatim}
+## Rows: 24 Columns: 3
+## -- Column specification --------------------------------------------------------
+## Delimiter: ";"
+## chr (1): EmissionClass
+## dbl (2): Year, Percentage
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Convert doubles to factors}
+\NormalTok{vanEmissions}\SpecialCharTok{$}\NormalTok{Year }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(vanEmissions}\SpecialCharTok{$}\NormalTok{Year)}
+\NormalTok{vanEmissions}\SpecialCharTok{$}\NormalTok{EmissionClass }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(vanEmissions}\SpecialCharTok{$}\NormalTok{EmissionClass)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Add your code here}
+\FunctionTok{str}\NormalTok{(vanEmissions)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## spc_tbl_ [24 x 3] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ Year         : Factor w/ 3 levels "2020","2022",..: 3 3 3 3 3 3 3 3 2 2 ...
+##  $ EmissionClass: Factor w/ 8 levels "0","1","2","3",..: 8 1 2 3 4 5 6 7 8 1 ...
+##  $ Percentage   : num [1:24] 0 2 0 1 5 15 26 51 0 2 ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   Year = col_double(),
+##   ..   EmissionClass = col_character(),
+##   ..   Percentage = col_double()
+##   .. )
+##  - attr(*, "problems")=<externalptr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(vanEmissions, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Year, }\AttributeTok{fill =}\NormalTok{ EmissionClass)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ vanEmissions}\SpecialCharTok{$}\NormalTok{Percentage), }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title=}\StringTok{"Emission Classes"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Distribution of Emission Classes of Vans}
+\StringTok{in the Netherlands from 2020 to 2024 "}\NormalTok{,}
+\AttributeTok{x =} \StringTok{"Year"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Percentage of Vans in Emission Class (\%)"}\NormalTok{) }\SpecialCharTok{+}
+\FunctionTok{labs}\NormalTok{(}\AttributeTok{caption =} \StringTok{"*Notice the constant increase in \% of vans in emission class 6, over the years. }\SpecialCharTok{\textbackslash{}n\textbackslash{}n}\StringTok{*The higher the number of the emission class, the}
+\StringTok{cleaner the vehicle."}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{DataVisualization2025_GATemplate_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\subsection{Task 1b)}\label{task-1b}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Import data:}
+\NormalTok{speedTickets2023 }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv2}\NormalTok{(}\StringTok{"Data/speedTickets\_perMonthPerProvince.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## i Using "','" as decimal and "'.'" as grouping mark. Use `read_delim()` for more control.
+\end{verbatim}
+
+\begin{verbatim}
+## Rows: 144 Columns: 4
+## -- Column specification --------------------------------------------------------
+## Delimiter: ";"
+## chr (2): Province, geometry
+## dbl (2): Month, Count
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{month }\OtherTok{\textless{}{-}}\NormalTok{ speedTickets2023}\SpecialCharTok{$}\NormalTok{Month}
+\NormalTok{province }\OtherTok{\textless{}{-}}\NormalTok{ speedTickets2023}\SpecialCharTok{$}\NormalTok{Province}
+\NormalTok{ticketCount }\OtherTok{\textless{}{-}}\NormalTok{ speedTickets2023}\SpecialCharTok{$}\NormalTok{Count}
+\NormalTok{geometry }\OtherTok{\textless{}{-}}\NormalTok{ speedTickets2023}\SpecialCharTok{$}\NormalTok{geometry}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(speedTickets2023)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## spc_tbl_ [144 x 4] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ Province: chr [1:144] "Drenthe" "Flevoland" "Friesland" "Gelderland" ...
+##  $ Month   : num [1:144] 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Count   : num [1:144] 2105 5458 790 22382 9286 ...
+##  $ geometry: chr [1:144] "list(list(c(232285.471929562, 231251.917931354, 231261.743475229, 231568.280993282, 231598.359215941, 231621.81"| __truncated__ "list(list(c(196651.755681345, 197117.195069101, 197259.105283637, 197241.341061378, 197075.696652895, 196727.31"| __truncated__ "list(list(c(151449.120854341, 151298.010865352, 151467.14390816, 151594.187858144, 151408.259884508, 151238.755"| __truncated__ "list(list(c(169923.725184882, 169599.195259039, 169586.345284018, 169064.358898762, 169069.359073158, 169923.72"| __truncated__ ...
+##  - attr(*, "spec")=
+##   .. cols(
+##   ..   Province = col_character(),
+##   ..   Month = col_double(),
+##   ..   Count = col_double(),
+##   ..   geometry = col_character()
+##   .. )
+##  - attr(*, "problems")=<externalptr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Add your code here}
+\FunctionTok{ggplot}\NormalTok{(speedTickets2023, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Month, }\AttributeTok{fill =}\NormalTok{ Province)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ Count), }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title=}\StringTok{"Provinces in the Netherlands"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Changes of Number of Speed Tickets Over Time"}\NormalTok{,}
+       \AttributeTok{subtitle =} \StringTok{"By Province in the Netherlands"}\NormalTok{,}
+\AttributeTok{x =} \StringTok{"Months"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Number of Speeding Tickets"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{DataVisualization2025_GATemplate_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\subsection{Task 1c)}\label{task-1c}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load data as a data frame, set variables to numeric}
+\NormalTok{marvel }\OtherTok{\textless{}{-}} \FunctionTok{read.csv2}\NormalTok{(}\StringTok{"Data/Marvel.csv"}\NormalTok{)}
+\NormalTok{marvel}\SpecialCharTok{$}\NormalTok{AudienceScore }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(marvel}\SpecialCharTok{$}\NormalTok{AudienceScore)}
+\NormalTok{marvel}\SpecialCharTok{$}\NormalTok{CriticsScore }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(marvel}\SpecialCharTok{$}\NormalTok{CriticsScore)}
+\NormalTok{marvel}\SpecialCharTok{$}\NormalTok{WorldGross }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(marvel}\SpecialCharTok{$}\NormalTok{WorldGross)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Add your code here}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Task 2. Remake the plot
+(50\%)}\label{task-2.-remake-the-plot-50}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Import data:}
+\NormalTok{potentialsolarenergyUSA }\OtherTok{\textless{}{-}} \FunctionTok{st\_read}\NormalTok{(}\StringTok{"Data/potentialsolarenergyUSA\_shp/potentialsolarenergyUSA.shp"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Reading layer `potentialsolarenergyUSA' from data source 
+##   `/Users/adala/Downloads/s4581733/Data/potentialsolarenergyUSA_shp/potentialsolarenergyUSA.shp' 
+##   using driver `ESRI Shapefile'
+## Simple feature collection with 51 features and 2 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -179.1435 ymin: 18.90612 xmax: 179.7809 ymax: 71.4125
+## Geodetic CRS:  WGS 84
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(potentialsolarenergyUSA)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Classes 'sf' and 'data.frame':   51 obs. of  3 variables:
+##  $ State   : chr  "Alabama" "Alaska" "Arizona" "Arkansas" ...
+##  $ SlrPtnt : num  3743 8283 11989 5015 9102 ...
+##  $ geometry:sfc_MULTIPOLYGON of length 51; first list element: List of 3
+##   ..$ :List of 1
+##   .. ..$ : num [1:406, 1:2] -87.4 -87.4 -87.4 -87.4 -87.4 ...
+##   ..$ :List of 1
+##   .. ..$ : num [1:15, 1:2] -87.5 -87.5 -87.4 -87.4 -87.5 ...
+##   ..$ :List of 1
+##   .. ..$ : num [1:13, 1:2] -88.1 -88.1 -88.1 -88.3 -88.3 ...
+##   ..- attr(*, "class")= chr [1:3] "XY" "MULTIPOLYGON" "sfg"
+##  - attr(*, "sf_column")= chr "geometry"
+##  - attr(*, "agr")= Factor w/ 3 levels "constant","aggregate",..: NA NA
+##   ..- attr(*, "names")= chr [1:2] "State" "SlrPtnt"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Add your code here}
+
+\FunctionTok{ggplot}\NormalTok{(potentialsolarenergyUSA}\SpecialCharTok{$}\NormalTok{geometry) }\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{fill=}\NormalTok{potentialsolarenergyUSA}\SpecialCharTok{$}\NormalTok{SlrPtnt)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_void}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_viridis\_c}\NormalTok{(}
+    \AttributeTok{trans =} \StringTok{"log"}\NormalTok{, }\AttributeTok{breaks =} \FunctionTok{c}\NormalTok{(}\DecValTok{10000}\NormalTok{, }\DecValTok{20000}\NormalTok{, }\DecValTok{30000}\NormalTok{, }\DecValTok{40000}\NormalTok{),}
+    \AttributeTok{name =} \StringTok{"terawatt hours"}\NormalTok{,}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"The USA is Ripe for Solar Power"}\NormalTok{,}
+    \AttributeTok{subtitle =} \StringTok{"Potential utility{-}scale capacity"}\NormalTok{,}
+    \AttributeTok{caption =} \StringTok{"Total: 282,845 terawatt hours"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{legend.position =} \StringTok{"top"}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in scale_fill_viridis_c(trans = "log", breaks = c(10000, 20000, :
+## log-2.718282 transformation introduced infinite values.
+\end{verbatim}
+
+\includegraphics{DataVisualization2025_GATemplate_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\end{document}
